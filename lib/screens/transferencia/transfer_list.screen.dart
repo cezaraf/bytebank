@@ -1,11 +1,11 @@
-import 'package:bytebank/models/transferencia.model.dart';
-import 'package:bytebank/screens/transferencia/formulario.screen.dart';
+import 'package:bytebank/models/transfer.model.dart';
+import 'package:bytebank/screens/transferencia/transfer_form.screen.dart';
 import 'package:flutter/material.dart';
 
 const _appBarTitle = 'Transferências';
 
 class ListaTransferencias extends StatefulWidget {
-  final List<Transferencia> _transferencias = List();
+  final List<Transfer> _transferencias = List();
 
   @override
   State<StatefulWidget> createState() {
@@ -34,7 +34,7 @@ class _ListaTransferenciaState extends State<ListaTransferencias> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) {
-              return FormularioTransferencia();
+              return TransferForm();
             }),
           ).then((value) => _atualizarLista(value));
         },
@@ -43,7 +43,7 @@ class _ListaTransferenciaState extends State<ListaTransferencias> {
     );
   }
 
-  void _atualizarLista(Transferencia value) {
+  void _atualizarLista(Transfer value) {
     this.setState(() {
       if (value != null) {
         this.widget._transferencias.add(value);
@@ -53,7 +53,7 @@ class _ListaTransferenciaState extends State<ListaTransferencias> {
 }
 
 class ItemTransferencia extends StatelessWidget {
-  final Transferencia transferencia;
+  final Transfer transferencia;
 
   const ItemTransferencia({Key key, this.transferencia}) : super(key: key);
 
@@ -62,8 +62,8 @@ class ItemTransferencia extends StatelessWidget {
     return Card(
       child: ListTile(
         leading: Icon(Icons.monetization_on),
-        title: Text(this.transferencia.valor.toString()),
-        subtitle: Text(this.transferencia.numeroConta?.toString()),
+        title: Text(this.transferencia.value.toString()),
+        subtitle: Text(this.transferencia.accountNumber?.toString()),
       ),
     );
   }

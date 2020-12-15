@@ -5,25 +5,23 @@ class Editor extends StatelessWidget {
   final String label;
   final String hint;
   final Icon icon;
+  final TextInputType textInputType;
 
-  const Editor({Key key, this.controller, this.label, this.hint, this.icon}) : super(key: key);
+  const Editor({Key key, this.controller, this.label, this.hint, this.icon, this.textInputType}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: TextField(
-        controller: this.controller,
-        style: TextStyle(
-          fontSize: 16.0,
-        ),
-        decoration: InputDecoration(
-          labelText: this.label,
-          hintText: this.hint,
-          icon: this.icon,
-        ),
-        keyboardType: TextInputType.number,
+    return TextField(
+      controller: this.controller,
+      style: TextStyle(
+        fontSize: 16.0,
       ),
+      decoration: InputDecoration(
+        labelText: this.label,
+        hintText: this.hint,
+        icon: this.icon,
+      ),
+      keyboardType: this.textInputType,
     );
   }
 }
