@@ -16,7 +16,7 @@ class ContactDao {
     final Database db = await getDatabase();
     final Map<String, dynamic> contactMap = Map();
     contactMap[_fullName] = contact.fullName;
-    contactMap[_accountNumber] = contact.accountName;
+    contactMap[_accountNumber] = contact.accountNumber;
     return db.insert(_tableName, contactMap);
   }
 

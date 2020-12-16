@@ -1,5 +1,6 @@
 import 'package:bytebank/screens/contact/contact_list.screen.dart';
-import 'package:bytebank/screens/transferencia/transfer_list.screen.dart';
+import 'package:bytebank/screens/transaction/transaction_list.screen.dart';
+import 'package:bytebank/screens/transfer/transfer_list.screen.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatelessWidget {
@@ -17,86 +18,69 @@ class Dashboard extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Image.asset('images/bytebank_logo.png'),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 0,
-                  top: 0,
-                  bottom: 8,
-                  right: 0
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _FeatureItem(
+                  'Transfer',
+                  Icons.monetization_on,
+                  onClick: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => ContactsList())),
                 ),
-                child: Material(
-                  color: Theme.of(context).primaryColor,
-                  child: InkWell(
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => ContactsList())),
-                    child: Container(
-                      height: 100,
-                      width: 150,
-                      padding: EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(
-                            Icons.people,
-                            color: Colors.white,
-                            size: 32,
-                          ),
-                          Text(
-                            'Contacts',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 0,
-                    top: 0,
-                    bottom: 8,
-                    right: 0
-                ),
-                child: Material(
-                  color: Theme.of(context).primaryColor,
-                  child: InkWell(
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => ListaTransferencias())),
-                    child: Container(
-                      height: 100,
-                      width: 150,
-                      padding: EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(
-                            Icons.transfer_within_a_station,
-                            color: Colors.white,
-                            size: 32,
-                          ),
-                          Text(
-                            'Transfer',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            ],
+                _FeatureItem(
+                  'Transfer feed',
+                  Icons.description,
+                  onClick: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => TransactionsList())),
+                )
+              ],
+            ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class _FeatureItem extends StatelessWidget {
+  final String name;
+  final IconData iconData;
+  final Function onClick;
+
+  const _FeatureItem(this.name, this.iconData, {@required this.onClick});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Material(
+        color: Theme.of(context).primaryColor,
+        child: InkWell(
+          onTap: () => this.onClick(),
+          child: Container(
+            height: 100,
+            width: 150,
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  this.iconData,
+                  color: Colors.white,
+                  size: 32,
+                ),
+                Text(
+                  this.name,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
