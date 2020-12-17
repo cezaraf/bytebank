@@ -52,7 +52,12 @@ class _FeatureItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(
+        left: 16,
+        top: 16,
+        bottom: 16,
+        right: 0
+      ),
       child: Material(
         color: Theme.of(context).primaryColor,
         child: InkWell(

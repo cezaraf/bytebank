@@ -1,6 +1,8 @@
+import 'package:bytebank/components/progress.component.dart';
 import 'package:bytebank/dao/contact.dao.dart';
 import 'package:bytebank/models/contact.model.dart';
 import 'package:bytebank/screens/contact/contact_form.screen.dart';
+import 'package:bytebank/screens/transaction/transaction_form.screen.dart';
 import 'package:flutter/material.dart';
 
 class ContactsList extends StatefulWidget {
@@ -25,22 +27,22 @@ class _ContactsListState extends State<ContactsList> {
             case ConnectionState.none:
               break;
             case ConnectionState.waiting:
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    CircularProgressIndicator(),
-                    Text('Loading'),
-                  ],
-                ),
-              );
+              return Progress();
               break;
             case ConnectionState.active:
               break;
             case ConnectionState.done:
               return ListView.builder(
-                itemBuilder: (context, position) => _ContactItem(contact: snapshot.data[position]),
+                itemBuilder: (context, position) => _ContactItem(
+                  contact: snapshot.data[position],
+                  onClick: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => TransactionForm(snapshot.data[position]),
+                      ),
+                    );
+                  },
+                ),
                 itemCount: snapshot.data.length,
               );
               break;
@@ -60,13 +62,15 @@ class _ContactsListState extends State<ContactsList> {
 
 class _ContactItem extends StatelessWidget {
   final Contact contact;
+  final Function onClick;
 
-  const _ContactItem({Key key, this.contact}) : super(key: key);
+  const _ContactItem({Key key, this.contact, @required this.onClick}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        onTap: () => this.onClick(),
         title: Text(
           this.contact.fullName,
           style: TextStyle(fontSize: 24),
