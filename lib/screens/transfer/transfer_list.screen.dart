@@ -1,4 +1,4 @@
-import 'package:bytebank/models/transfer.model.dart';
+import 'package:bytebank/models/transfer.dart';
 import 'package:bytebank/screens/transfer/transfer_form.screen.dart';
 import 'package:flutter/material.dart';
 

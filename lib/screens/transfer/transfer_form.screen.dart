@@ -1,5 +1,5 @@
-import 'package:bytebank/components/editor.component.dart';
-import 'package:bytebank/models/transfer.model.dart';
+import 'package:bytebank/components/editor.dart';
+import 'package:bytebank/models/transfer.dart';
 import 'package:flutter/material.dart';
 
 const _appBarTitle = 'New Transfer';

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:bytebank/http/webclient.dart';
-import 'package:bytebank/models/transaction.model.dart';
+import 'package:bytebank/models/transaction.dart';
 import 'package:http/http.dart';
 
 class TransactionWebClient {

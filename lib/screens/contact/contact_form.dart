@@ -1,6 +1,6 @@
-import 'package:bytebank/components/editor.component.dart';
-import 'package:bytebank/dao/contact.dao.dart';
-import 'package:bytebank/models/contact.model.dart';
+import 'package:bytebank/components/editor.dart';
+import 'package:bytebank/dao/contact_dao.dart';
+import 'package:bytebank/models/contact.dart';
 import 'package:flutter/material.dart';
 
 class ContactForm extends StatelessWidget {
